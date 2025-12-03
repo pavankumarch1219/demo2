@@ -16,26 +16,25 @@ pipeline {
 
         stage('Compile') {
             steps {
-                dir('maruthi') {
+        
                     sh 'mvn compile'
                 }
             }
-        }
+        
 
         stage('Test') {
             steps {
-                dir('maruthi') {
+                
                     sh 'mvn test'
                 }
             }
-        }
-
-        stage('Build') {
+              
+stage('Build') {
             steps {
-                dir('maruthi') {
+               
                     sh 'mvn clean install'
                 }
             }
-        }
+        
     }
 }
