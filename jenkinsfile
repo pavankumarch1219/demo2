@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+
+    environment {
+        git_branch = 'master'
+        git_url = 'https://github.com/pavankumarch1219/demo2.git'
+    }
+
+    stages {
+
+        stage('Clone') {
+            steps {
+                git branch: "${git_branch}", url: "${git_url}"
+            }
+        }
+
+        stage('Compile') {
+            steps {
+                dir('maruthi') {
+                    sh 'mvn compile'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                dir('maruthi') {
+                    sh 'mvn test'
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                dir('maruthi') {
+                    sh 'mvn clean install'
+                }
+            }
+        }
+    }
+}
